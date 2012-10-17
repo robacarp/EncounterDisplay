@@ -1,7 +1,3 @@
-// Test sketch for El Escudo Dos
-// Turn each EL channel (A-H) on in sequence and repeat
-// Mike Grusin, SparkFun Electronics
-
 void setup() {
   // The EL channels are on pins 2 through 9
   // Initialize the pins as outputs
@@ -13,26 +9,34 @@ void setup() {
   pinMode(7, OUTPUT);  // channel F
   pinMode(8, OUTPUT);  // channel G
   pinMode(9, OUTPUT);  // channel H
-  // We also have two status LEDs, pin 10 on the Escudo, 
-  // and pin 13 on the Arduino itself
-  pinMode(10, OUTPUT);
-  pinMode(13, OUTPUT);
+
+  pinMode(10, OUTPUT); //Escudo Status LED
+
+  // Set all the lights to "on"
+  digitalWrite(2, 1);
+  digitalWrite(3, 1);
+  digitalWrite(4, 1);
+  digitalWrite(5, 1);
+  digitalWrite(6, 1);
+  digitalWrite(7, 1);
+  digitalWrite(8, 1);
+  digitalWrite(9, 1);
 }
 
-void loop() 
-{
-  int x,status;
+int last_flicker = 0;
 
-  // Step through all eight EL channels (pins 2 through 9)
-  for (x=2; x<=9; x++)
-  {
-    digitalWrite(x, HIGH);   // turn the EL channel on
-    delay(100);              // wait for 1/10 second
-    digitalWrite(x, LOW);    // turn the EL channel off
+void loop() {
+  //randomly flicker one of the lights
+  flicker(random(10)-1);
+  delay(random(3000));
+}
 
-    digitalWrite(10, status);   // blink both status LEDs
-    digitalWrite(13, status);
-    status = !status; 
+void flicker(int light){
+  for (int i=0; i<3; i++){
+    digitalWrite(light, 0);
+    delay(random(100));
+    digitalWrite(light, 1);
+    delay(random(200));
   }
 }
 

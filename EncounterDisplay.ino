@@ -2,27 +2,27 @@
 // Turn each EL channel (A-H) on in sequence and repeat
 // Mike Grusin, SparkFun Electronics
 
-void setup() {                
+void setup() {
   // The EL channels are on pins 2 through 9
   // Initialize the pins as outputs
-  pinMode(2, OUTPUT);  // channel A  
-  pinMode(3, OUTPUT);  // channel B   
+  pinMode(2, OUTPUT);  // channel A
+  pinMode(3, OUTPUT);  // channel B
   pinMode(4, OUTPUT);  // channel C
-  pinMode(5, OUTPUT);  // channel D    
+  pinMode(5, OUTPUT);  // channel D
   pinMode(6, OUTPUT);  // channel E
   pinMode(7, OUTPUT);  // channel F
   pinMode(8, OUTPUT);  // channel G
   pinMode(9, OUTPUT);  // channel H
   // We also have two status LEDs, pin 10 on the Escudo, 
   // and pin 13 on the Arduino itself
-  pinMode(10, OUTPUT);     
-  pinMode(13, OUTPUT);    
+  pinMode(10, OUTPUT);
+  pinMode(13, OUTPUT);
 }
 
 void loop() 
 {
   int x,status;
-  
+
   // Step through all eight EL channels (pins 2 through 9)
   for (x=2; x<=9; x++)
   {

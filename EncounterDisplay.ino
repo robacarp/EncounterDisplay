@@ -13,22 +13,21 @@ void setup() {
   pinMode(10, OUTPUT); //Escudo Status LED
 
   // Set all the lights to "on"
-  digitalWrite(2, 1);
-  digitalWrite(3, 1);
-  digitalWrite(4, 1);
-  digitalWrite(5, 1);
-  digitalWrite(6, 1);
-  digitalWrite(7, 1);
-  digitalWrite(8, 1);
-  digitalWrite(9, 1);
+  PORTD = 0xFFFF;
+  PORTB = 0xFFFF;
 }
-
-int last_flicker = 0;
 
 void loop() {
   //randomly flicker one of the lights
   flicker(random(10)-1);
   delay(random(3000));
+
+  //kill it after 2 hours
+  if (millis() > 7200000){
+    PORTD = 0x0000;
+    PORTB = 0x0000;
+    while(true);
+  }
 }
 
 void flicker(int light){
